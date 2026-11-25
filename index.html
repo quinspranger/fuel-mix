@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101318">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fuel Mix">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Fuel Mix</title>
+<style>
+:root{color-scheme:dark;--bg:#101318;--panel:#191f27;--panel2:#202833;--line:#303a47;--muted:#9aa7b6;--text:#f3f6fa;--accent:#b7f36b;--accent2:#d6ff9c;--red:#ff8a8a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#263342 0%,var(--bg) 48%);color:var(--text);font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+main{max-width:520px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) 18px calc(28px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 22px}.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border-radius:14px;background:var(--accent);color:#17200f;display:grid;place-items:center;font-size:22px;font-weight:900}.brand strong{font-size:18px;letter-spacing:.2px}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+.pill{font-size:11px;color:var(--accent);border:1px solid #526a3c;border-radius:30px;padding:7px 10px;letter-spacing:.5px}
+h1{font-size:28px;line-height:1.12;margin:0 0 7px;letter-spacing:-.8px}.sub{color:var(--muted);margin:0 0 22px;font-size:14px;line-height:1.45}
+.card{background:linear-gradient(145deg,#1d252f,#171d25);border:1px solid var(--line);border-radius:21px;padding:18px;margin-bottom:14px;box-shadow:0 12px 30px #0002}
+.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.cardhead strong{font-size:14px}.eyebrow{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1.2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;color:var(--muted);font-size:12px;margin:0 0 7px}.inputwrap{display:flex;align-items:center;background:#11161d;border:1px solid #35404d;border-radius:12px;padding:0 11px}.inputwrap:focus-within{border-color:var(--accent)}input,select{font:inherit;color:var(--text);background:transparent;border:0;outline:0;width:100%;min-width:0;padding:13px 0;font-size:17px;font-weight:650} .prefix{color:var(--muted);font-size:14px;margin-right:5px}
+.mixrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:17px 0 9px}.mixrow label{font-size:12px;color:var(--muted)}.mixcontrols{display:flex;align-items:center;gap:8px}.mixcontrols input{width:54px;text-align:center;background:#11161d;border:1px solid #35404d;border-radius:9px;padding:8px 4px;font-size:15px}.mixcontrols span{color:var(--muted);font-size:12px}
+.range{width:100%;accent-color:var(--accent);margin:8px 0 0}
+.result{background:linear-gradient(135deg,#26351e,#1d2a1b);border:1px solid #4b6536;border-radius:18px;padding:17px;margin-top:15px}.resulttop{display:flex;justify-content:space-between;align-items:center;color:#d6e9c5;font-size:12px}.big{font-size:38px;font-weight:800;letter-spacing:-1.5px;margin:6px 0 2px;color:#f3ffe8}.unit{font-size:13px;color:#c2d5b2}
+.fuelresults{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.fuel{background:#111a12aa;border:1px solid #5b7447;border-radius:13px;padding:12px}.fuelname{font-size:12px;color:#c7d9b9}.litres{font-size:22px;font-weight:750;margin:4px 0}.cost{font-size:12px;color:#b5c7a7}
+.actions{display:flex;gap:9px;margin-top:14px}.btn{border:0;border-radius:12px;padding:13px 15px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}.primary{background:var(--accent);color:#18200f;flex:1}.secondary{background:#29323d;color:var(--text);border:1px solid #3b4653}
+.tabs{display:flex;gap:7px;background:#151b23;border:1px solid var(--line);border-radius:13px;padding:5px;margin:0 0 14px}.tab{flex:1;background:transparent;color:var(--muted);border:0;border-radius:9px;padding:10px 5px;font-size:13px;font-weight:650}.tab.active{background:#303b47;color:var(--text)}
+.panel[hidden]{display:none}.historyitem{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.historyitem:last-child{border:0}.historyitem strong{font-size:14px}.historyitem small{display:block;color:var(--muted);font-size:12px;margin-top:4px}.historyitem .amount{text-align:right;font-weight:700}.empty{color:var(--muted);font-size:13px;text-align:center;padding:22px 5px}
+.note{font-size:11px;color:var(--muted);line-height:1.5;margin:14px 3px}.hidden{display:none!important}
+@media(max-width:360px){main{padding-left:13px;padding-right:13px}.card{padding:15px}.big{font-size:33px}}
+</style>
+</head>
+<body>
+<main>
+<header><div class="brand"><div class="logo">↗</div><div><strong>FUEL MIX</strong><small>OCTANE BLENDER</small></div></div><div class="pill">NZD · LITRES</div></header>
+<h1>Get the mix<br>right at the pump.</h1>
+<p class="sub">Work out exactly how much 91 and 95 to buy, based on your budget or the litres you need.</p>
+<div class="tabs"><button class="tab active" data-tab="budget">Budget</button><button class="tab" data-tab="volume">Litres</button><button class="tab" data-tab="history">History</button></div>
+<section class="panel" id="budget">
+<div class="card">
+<div class="cardhead"><strong>Fuel prices</strong><span class="eyebrow">Price per litre</span></div>
+<div class="grid">
+<div class="field"><label for="p91">91 octane</label><div class="inputwrap"><span class="prefix">$</span><input id="p91" type="number" inputmode="decimal" step="0.001" min="0" value="3.126"></div></div>
+<div class="field"><label for="p95">95 octane</label><div class="inputwrap"><span class="prefix">$</span><input id="p95" type="number" inputmode="decimal" step="0.001" min="0" value="3.316"></div></div>
+</div>
+<div class="mixrow"><label for="mix">Mixture ratio</label><div class="mixcontrols"><input id="mix" type="number" min="0" max="100" value="50"><span>% 91</span><span>/</span><b id="mix95">50%</b><span>95</span></div></div>
+<input class="range" id="mixrange" type="range" min="0" max="100" value="50">
+<div class="field" style="margin-top:17px"><label for="budgetValue">Total amount to spend</label><div class="inputwrap"><span class="prefix">$</span><input id="budgetValue" type="number" inputmode="decimal" min="0" step=".01" value="200"></div></div>
+<div class="result" id="budgetResult">
+<div class="resulttop"><span>TOTAL FUEL</span><span id="budgetRatio">50% 91 / 50% 95</span></div>
+<div class="big" id="totalLitres">62.15 L</div><div class="unit">combined volume</div>
+<div class="fuelresults"><div class="fuel"><div class="fuelname">91 OCTANE</div><div class="litres" id="litres91">31.99 L</div><div class="cost" id="cost91">$100.00</div></div><div class="fuel"><div class="fuelname">95 OCTANE</div><div class="litres" id="litres95">30.16 L</div><div class="cost" id="cost95">$100.00</div></div></div>
+</div>
+<div class="card" style="margin-top:14px;margin-bottom:0;background:#151c24">
+<div class="cardhead"><strong>Compare single-fuel options</strong><span class="eyebrow">Same budget</span></div>
+<div class="fuelresults" style="margin-top:0">
+<div class="fuel"><div class="fuelname">100% 91 OCTANE</div><div class="litres" id="all91">63.98 L</div><div class="cost" id="all91cost">$200.00</div></div>
+<div class="fuel"><div class="fuelname">100% 95 OCTANE</div><div class="litres" id="all95">60.31 L</div><div class="cost" id="all95cost">$200.00</div></div>
+</div>
+<div class="note" style="margin-bottom:0">Shows how much fuel the same total spend would buy if you filled up with only one octane.</div>
+</div>
+<div class="actions"><button class="btn primary" id="saveBudget">Save calculation</button><button class="btn secondary" id="reset">Reset</button></div>
+</div>
+</section>
+<section class="panel" id="volume" hidden>
+<div class="card">
+<div class="cardhead"><strong>Calculate by litres</strong><span class="eyebrow">Target volume</span></div>
+<div class="grid">
+<div class="field"><label for="vp91">91 price ($/L)</label><div class="inputwrap"><span class="prefix">$</span><input id="vp91" type="number" inputmode="decimal" step=".001" value="3.126"></div></div>
+<div class="field"><label for="vp95">95 price ($/L)</label><div class="inputwrap"><span class="prefix">$</span><input id="vp95" type="number" inputmode="decimal" step=".001" value="3.316"></div></div>
+</div>
+<div class="mixrow"><label for="vmix">Mixture ratio</label><div class="mixcontrols"><input id="vmix" type="number" min="0" max="100" value="50"><span>% 91</span><span>/</span><b id="vmix95">50%</b><span>95</span></div></div>
+<input class="range" id="vmixrange" type="range" min="0" max="100" value="50">
+<div class="field" style="margin-top:17px"><label for="targetLitres">Total litres required</label><div class="inputwrap"><input id="targetLitres" type="number" inputmode="decimal" min="0" step=".1" value="60"><span class="prefix">L</span></div></div>
+<div class="result"><div class="resulttop"><span>TOTAL COST</span><span id="volumeRatio">50% 91 / 50% 95</span></div><div class="big" id="totalCost">$193.26</div><div class="unit">estimated spend</div><div class="fuelresults"><div class="fuel"><div class="fuelname">91 OCTANE</div><div class="litres" id="vlitres91">30.00 L</div><div class="cost" id="vcost91">$93.78</div></div><div class="fuel"><div class="fuelname">95 OCTANE</div><div class="litres" id="vlitres95">30.00 L</div><div class="cost" id="vcost95">$99.48</div></div></div></div>
+<div class="actions"><button class="btn primary" id="saveVolume">Save calculation</button></div>
+</div>
+</section>
+<section class="panel" id="history" hidden><div class="card"><div class="cardhead"><strong>Saved calculations</strong><button class="btn secondary" id="clearHistory" style="padding:7px 10px;font-size:11px">Clear</button></div><div id="historyList" class="empty">No saved calculations yet.</div></div></section>
+<p class="note">Calculations use the mixture ratio by volume. Actual pump totals may vary slightly due to rounding and dispenser cut-off. Your prices and saved history stay on this device.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id), money=n=>'$'+n.toFixed(2), litres=n=>n.toFixed(2)+' L';
+function val(id){return Math.max(0,Number($(id).value)||0)}
+function ratio(prefix){let n=Math.min(100,val(prefix+'mix'));return n/100}
+function syncMix(prefix,source){let n=Math.min(100,Math.max(0,Number(source.value)||0));$(prefix+'mix').value=n;$(prefix+'mixrange').value=n;$(prefix+'mix95').textContent=(100-n)+'%';}
+function budgetCalc(){let a=val('p91'),b=val('p95'),budget=val('budgetValue'),r=ratio('');let denom=r*a+(1-r)*b;let total=denom?budget/denom:0,l1=total*r,l2=total*(1-r),c1=l1*a,c2=l2*b;$('totalLitres').textContent=litres(total);$('litres91').textContent=litres(l1);$('litres95').textContent=litres(l2);$('cost91').textContent=money(c1);$('cost95').textContent=money(c2);$('budgetRatio').textContent=`${Math.round(r*100)}% 91 / ${Math.round((1-r)*100)}% 95`;$('all91').textContent=litres(a?budget/a:0);$('all91cost').textContent=money(budget);$('all95').textContent=litres(b?budget/b:0);$('all95cost').textContent=money(budget);return {mode:'Budget',p91:a,p95:b,r,budget,total,l1,l2,c1,c2};}
+function volumeCalc(){let a=val('vp91'),b=val('vp95'),total=val('targetLitres'),r=ratio('v'),l1=total*r,l2=total*(1-r),c1=l1*a,c2=l2*b;$('totalCost').textContent=money(c1+c2);$('vlitres91').textContent=litres(l1);$('vlitres95').textContent=litres(l2);$('vcost91').textContent=money(c1);$('vcost95').textContent=money(c2);$('volumeRatio').textContent=`${Math.round(r*100)}% 91 / ${Math.round((1-r)*100)}% 95`;return {mode:'Litres',p91:a,p95:b,r,total,cost:c1+c2,l1,l2,c1,c2};}
+['p91','p95','budgetValue','mix'].forEach(id=>$(id).addEventListener('input',()=>{if(id==='mix')syncMix('', $('mix'));else budgetCalc();budgetCalc()}));
+$('mixrange').addEventListener('input',()=>{syncMix('', $('mixrange'));budgetCalc()});
+['vp91','vp95','targetLitres','vmix'].forEach(id=>$(id).addEventListener('input',()=>{if(id==='vmix')syncMix('v',$('vmix'));volumeCalc()}));
+$('vmixrange').addEventListener('input',()=>{syncMix('v',$('vmixrange'));volumeCalc()});
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==btn.dataset.tab);if(btn.dataset.tab==='history')renderHistory()}));
+function history(){try{return JSON.parse(localStorage.getItem('fuelMixHistory')||'[]')}catch(e){return []}}
+function save(item){let h=history();h.unshift({...item,date:new Date().toLocaleString()});localStorage.setItem('fuelMixHistory',JSON.stringify(h.slice(0,30)));alert('Calculation saved on this device.')}
+$('saveBudget').onclick=()=>save(budgetCalc());$('saveVolume').onclick=()=>save(volumeCalc());
+function renderHistory(){let h=history(),el=$('historyList');if(!h.length){el.className='empty';el.textContent='No saved calculations yet.';return}el.className='';el.innerHTML=h.map(x=>`<div class="historyitem"><div><strong>${x.mode} · ${Math.round(x.r*100)}/${100-Math.round(x.r*100)} mix</strong><small>${x.date} · 91 $${x.p91.toFixed(3)} / 95 $${x.p95.toFixed(3)}</small></div><div class="amount">${x.mode==='Budget'?litres(x.total):money(x.cost)}<small>${x.mode==='Budget'?money(x.budget):litres(x.total)}</small></div></div>`).join('')}
+$('clearHistory').onclick=()=>{if(confirm('Delete all saved calculations?')){localStorage.removeItem('fuelMixHistory');renderHistory()}};
+$('reset').onclick=()=>{$('p91').value='3.126';$('p95').value='3.316';$('budgetValue').value='200';$('mix').value=50;syncMix('',$('mix'));budgetCalc()};
+budgetCalc();volumeCalc();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
